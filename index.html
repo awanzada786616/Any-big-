@@ -104,6 +104,21 @@
         <option>Quetta</option>
         <option>Sialkot</option>
         <option>Bahawalpur</option>
+        <option>Sargodha</option>
+        <option>Chakwal</option>
+        <option>Munara</option>
+      </select>
+
+      <label>State</label>
+      <select id="state" required>
+        <option value="">-- Select State/Province --</option>
+        <option>Punjab</option>
+        <option>Sindh</option>
+        <option>Khyber Pakhtunkhwa</option>
+        <option>Balochistan</option>
+        <option>Azad Kashmir</option>
+        <option>Gilgit Baltistan</option>
+        <option>Islamabad Capital Territory</option>
       </select>
 
       <label>Country</label>
@@ -139,6 +154,15 @@
           Name: Sumaira
         </div>
       </div>
+
+      <div class="payment-method">
+        <img src="https://i.postimg.cc/8zgwHD00/images-6.png" alt="Sadapay Logo">
+        <div class="payment-details">
+          <strong>Sadapay</strong><br>
+          <strong>0334 2002756</strong><br>
+          Name: Sumaira
+        </div>
+      </div>
     </div>
   </div>
 
@@ -151,10 +175,19 @@
       const address = document.getElementById("address").value;
       const postal = document.getElementById("postal").value;
       const city = document.getElementById("city").value;
+      const state = document.getElementById("state").value;
       const country = document.getElementById("country").value;
 
       const subject = "New Order from Wasi Store";
-      const body = `Name: ${name}%0D%0APhone: ${phone}%0D%0AAddress: ${address}%0D%0APostal Code: ${postal}%0D%0ACity: ${city}%0D%0ACountry: ${country}%0D%0A%0D%0ANote: Customer has been instructed to send advance payment of 3000 PKR.`;
+      const body =
+        `Name: ${name}%0D%0A` +
+        `Phone: ${phone}%0D%0A` +
+        `Address: ${address}%0D%0A` +
+        `Postal Code: ${postal}%0D%0A` +
+        `City: ${city}%0D%0A` +
+        `State: ${state}%0D%0A` +
+        `Country: ${country}%0D%0A%0D%0A` +
+        `Note: Customer instructed to send advance payment of 3000 PKR.`;
 
       const mailtoLink = `mailto:awaisnayyar99@gmail.com?subject=${subject}&body=${body}`;
       window.location.href = mailtoLink;
