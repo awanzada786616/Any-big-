@@ -1,45 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wasi Order Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wasi Order Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    .container {
+      max-width: 550px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #2c5364;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #2c5364;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #203a43;
+    }
+    .note {
+      margin-top: 30px;
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .payment-method {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .payment-method img {
+      height: 40px;
+      margin-right: 15px;
+    }
+    .payment-details {
+      line-height: 1.4;
+    }
+  </style>
 </head>
 <body>
-  <h2>Place Order</h2>
-  <form id="orderForm">
-    <input type="text" placeholder="Full Name" id="name" required><br><br>
-    <input type="tel" placeholder="Phone Number" id="phone" required><br><br>
-    <input type="text" placeholder="Address" id="address" required><br><br>
-    <input type="text" placeholder="City" id="city" required><br><br>
-    <button type="submit">Submit Order</button>
-  </form>
 
-  <p id="successMsg" style="display:none;color:green;">✅ Order placed successfully!</p>
+<div class="container">
+  <h2>Order Now - Wasi Store</h2>
+  <form id="orderForm">
+    <label>Full Name</label>
+    <input type="text" id="name" required>
 
-  <script type="module" src="firebase.js"></script>
-  <script type="module">
-    const db = window.firebaseDB;
-    const ref = window.firebaseRef;
-    const push = window.firebasePush;
+    <label>Phone Number</label>
+    <input type="tel" id="phone" required>
 
-    const form = document.getElementById('orderForm');
-    const msg = document.getElementById('successMsg');
+    <label>Address</label>
+    <input type="text" id="address" required>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const order = {
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        status: 'pending',
-        timestamp: new Date().toISOString()
-      };
-      await push(ref(db, 'orders'), order);
-      form.reset();
-      msg.style.display = 'block';
-    });
-  </script>
+    <label>Postal Code</label>
+    <input type="text" id="postal" required>
+
+    <label>City</label>
+    <input type="text" id="city" required>
+
+    <label>State</label>
+    <input type="text" id="state" required>
+
+    <label>Country</label>
+    <input type="text" id="country" value="Pakistan" required>
+
+    <button type="submit">Confirm Order</button>
+  </form>
+
+  <div class="note">
+    <strong>Note:</strong> Please send an advance of <strong>3000 PKR</strong> to the following number.  
+    Our team will contact you within <strong>20 minutes</strong> after payment.
+
+    <div class="payment-method">
+      <img src="https://i.postimg.cc/Y243BhcP/Easypaisa-logo.png" alt="Easypaisa Logo">
+      <div class="payment-details">
+        <strong>Easypaisa</strong><br>
+        <strong>0317 5768178</strong><br>
+        Name: Munir Akhtar
+      </div>
+    </div>
+
+    <div class="payment-method">
+      <img src="https://i.postimg.cc/5NSQhVtG/images-5.png" alt="JS Bank Logo">
+      <div class="payment-details">
+        <strong>JS Bank</strong><br>
+        <strong>0334 2002756</strong><br>
+        Name: Sumaira
+      </div>
+    </div>
+
+    <div class="payment-method">
+      <img src="https://i.postimg.cc/8zgwHD00/images-6.png" alt="Sadapay Logo">
+      <div class="payment-details">
+        <strong>Sadapay</strong><br>
+        <strong>0334 2002756</strong><br>
+        Name: Sumaira
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxxxxxxxxxxxx",
+    authDomain: "shadow-predictions.firebaseapp.com",
+    databaseURL: "https://shadow-predictions-default-rtdb.firebaseio.com",
+    projectId: "shadow-predictions",
+    storageBucket: "shadow-predictions.appspot.com",
+    messagingSenderId: "xxxxxx",
+    appId: "1:xxxxxx:web:xxxxxx"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  document.getElementById("orderForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const order = {
+      name: document.getElementById("name").value,
+      phone: document.getElementById("phone").value,
+      address: document.getElementById("address").value,
+      postal: document.getElementById("postal").value,
+      city: document.getElementById("city").value,
+      state: document.getElementById("state").value,
+      country: document.getElementById("country").value,
+      status: "pending",
+      timestamp: new Date().toISOString()
+    };
+
+    push(ref(db, 'orders'), order)
+      .then(() => alert("✅ Order Placed Successfully!"))
+      .catch((error) => alert("❌ Error: " + error));
+      
+    this.reset();
+  });
+</script>
 </body>
 </html>
