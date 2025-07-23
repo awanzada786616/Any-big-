@@ -6,57 +6,25 @@
   <title>Wasi Order Form</title>
 </head>
 <body style="font-family:sans-serif; background:#f4f4f4; padding:20px">
-  <h2>📦 Order Now - Wasi Store</h2>
-  <form id="orderForm" style="max-width:400px; margin:auto; background:#fff; padding:20px; border-radius:10px">
-    <input type="text" id="name" placeholder="Full Name" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="tel" id="phone" placeholder="Phone Number" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="text" id="address" placeholder="Full Address" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="text" id="city" placeholder="City" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="text" id="state" placeholder="State" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="text" id="postal" placeholder="Postal Code" required style="width:100%;padding:10px;margin:8px 0">
-    <input type="text" id="country" value="Pakistan" required style="width:100%;padding:10px;margin:8px 0">
 
-    <button type="submit" style="padding:12px; background:#2c5364; color:#fff; border:none; width:100%; border-radius:8px">Submit Order</button>
+  <h2 style="text-align:center;">📦 Order Now - Wasi Store</h2>
+
+  <form action="https://formsubmit.co/awaisnayyar99@gmail.com" method="POST" style="max-width:400px; margin:auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+    <!-- Hidden inputs -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://malikwasi.store/thankyou.html">
+
+    <input type="text" name="name" placeholder="Full Name" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="tel" name="phone" placeholder="Phone Number" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="text" name="address" placeholder="Full Address" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="text" name="city" placeholder="City" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="text" name="state" placeholder="State" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="text" name="postal" placeholder="Postal Code" required style="width:100%;padding:10px;margin:8px 0">
+    <input type="text" name="country" value="Pakistan" required style="width:100%;padding:10px;margin:8px 0">
+
+    <button type="submit" style="padding:12px; background:#2c5364; color:#fff; border:none; width:100%; border-radius:8px; font-weight:bold;">Submit Order</button>
   </form>
 
-  <p id="success" style="text-align:center; color:green; display:none;">✅ Order submitted successfully!</p>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDxxxxxxxxxxxx",
-      authDomain: "shadow-predictions.firebaseapp.com",
-      databaseURL: "https://shadow-predictions-default-rtdb.firebaseio.com",
-      projectId: "shadow-predictions",
-      storageBucket: "shadow-predictions.appspot.com",
-      messagingSenderId: "xxxxxx",
-      appId: "1:xxxxxx:web:xxxxxx"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    document.getElementById("orderForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const data = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        state: document.getElementById("state").value,
-        postal: document.getElementById("postal").value,
-        country: document.getElementById("country").value,
-        status: "pending",
-        timestamp: new Date().toISOString()
-      };
-
-      await push(ref(db, "orders"), data);
-      document.getElementById("orderForm").reset();
-      document.getElementById("success").style.display = "block";
-    });
-  </script>
 </body>
 </html>
